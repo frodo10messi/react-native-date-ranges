@@ -62,6 +62,8 @@ export default class ComposePicker extends Component {
   };
 
   onClickCancel = () => {
+    const returnFormat = this.props.returnFormat || 'YYYY/MM/DD';
+
     this.setState({
       startDate:null,
       endDate:null
@@ -73,6 +75,12 @@ export default class ComposePicker extends Component {
         clearEnd: "",
         showContent: false
     })
+    if (typeof this.props.onConfirm === 'function') {
+      this.props.onConfirm({
+        startDate: this.state.startDate,
+        endDate: this.state.endDate
+      });
+    }
     this.setModalVisible(false);
 
 }
