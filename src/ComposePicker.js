@@ -67,6 +67,13 @@ export default class ComposePicker extends Component {
     this.setState({
       startDate:null,
       endDate:null
+    },()=>{
+      if (typeof this.props.onConfirm === 'function') {
+        this.props.onConfirm({
+          startDate: this.state.startDate,
+          endDate: this.state.endDate
+        });
+      }
     })
     this.picker.setState({
         startDate: null,
@@ -75,12 +82,7 @@ export default class ComposePicker extends Component {
         clearEnd: "",
         showContent: false
     })
-    if (typeof this.props.onConfirm === 'function') {
-      this.props.onConfirm({
-        startDate: this.state.startDate,
-        endDate: this.state.endDate
-      });
-    }
+     
     this.setModalVisible(false);
 
 }
